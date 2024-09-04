@@ -10,6 +10,8 @@ import UserProfile from "../pages/UserProfile";
 import Account from "../pages/Account";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
+import Favorites from "../pages/Favorites";
+import PersonalInfo from "../pages/PersonalInfo";
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +47,7 @@ export const router = createBrowserRouter([
         element: <Account />,
       },
       {
-        path: "/personalInfo",
+        path: "/personalinfo",
         element: <PersonalInfo />,
       },
       {
