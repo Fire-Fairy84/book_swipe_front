@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   FormWrapper,
@@ -6,8 +7,7 @@ import {
   Input,
   Button,
   LinkStyled,
-} from "../login/styled";
-import { useNavigate } from "react-router-dom";
+} from "../login/loginStyled";
 import useApi from "../../services/useApi";
 import { API_BASE_URL } from "../../config/urls";
 
@@ -17,7 +17,7 @@ const LoginForm = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook para la navegación
   const { request, loading, error } = useApi({
     apiEndpoint: `${API_BASE_URL}login/`,
     method: "POST",
@@ -37,7 +37,9 @@ const LoginForm = () => {
       const response = await request(formData);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("username", formData.username);
-      navigate(`/form?username=${encodeURIComponent(formData.username)}`);
+
+      // Redirige a la página de Swipe tras un login exitoso
+      navigate("/swipe"); // Redirige al usuario a la página de swipe
     } catch (err) {
       console.error("Login error:", err);
     }

@@ -6,7 +6,7 @@ import {
   Input,
   Button,
   LinkStyled,
-} from "../login/styled";
+} from "../login/loginStyled";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../services/useApi";
 import { API_BASE_URL } from "../../config/urls";

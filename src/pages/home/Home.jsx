@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
-import { HomeContainer, Logo, Title, Content, Button } from "./styles";
+import { HomeContainer, Logo, Title, Content, Button } from "./homeStyled";
 
 const Home = () => {
   const navigate = useNavigate();
