@@ -1,26 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./Navbar.css"; // Estilos específicos para la navbar
+import { NavbarContainer, NavButton } from "../navbar/styles";
 
-function Navbar() {
+const Navbar = () => {
   return (
-    <nav className="navbar">
-      <ul>
-        <li>
-          <Link to="/">Inicio</Link>
-        </li>
-        <li>
-          <Link to="/swipe">Swipe</Link>
-        </li>
-        <li>
-          <Link to="/account">Mi Cuenta</Link>
-        </li>
-        <li>
-          <Link to="/profile">Perfil</Link>
-        </li>
-      </ul>
-    </nav>
+    <NavbarContainer>
+      <NavButton>Button 1</NavButton>
+      <NavButton>Button 2</NavButton>
+      <NavButton>Button 3</NavButton>
+      <NavButton>Button 4</NavButton>
+    </NavbarContainer>
   );
-}
+};
 
 export default Navbar;
