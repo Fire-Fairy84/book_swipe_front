@@ -10,9 +10,6 @@ export const Container = styled.div`
   background-size: cover;
   width: 100vw; /* Asegura que el contenedor ocupe todo el ancho */
   height: 100vh; /* Asegura que el contenedor ocupe toda la altura */
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 `;
 
 export const FormWrapper = styled.form`
