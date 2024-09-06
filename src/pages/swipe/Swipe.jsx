@@ -49,18 +49,22 @@ const SwipePage = () => {
   };
 
   return (
-    <SwipeContainer>
-      <Header />
-      <CardContainer>
+    <SwipeContainer class="tinderCards">
+      <CardContainer class="tinderCards_container">
         {books.map((book) => (
           <TinderCard
+            style={{
+              position: "absolute",
+              top: 0,
+            }}
             key={book.id}
+            preventSwipe={["up", "down"]}
             onSwipe={(dir) => swiped(dir, book.title)}
             onCardLeftScreen={() => outOfFrame(book.title)}
           >
-            <BookCover>
+            <BookCover classname="card">
               <img
-                src={book.cover_image} // No es necesario concatenar MEDIA_BASE_URL si la URL ya es completa
+                src={book.cover_image}
                 alt={`Portada de ${book.title}`}
                 style={{
                   width: "100%",

@@ -8,6 +8,7 @@ export const SwipeContainer = styled.div`
   height: 100vh;
   padding: 0;
   overflow: hidden;
+  position: relative;
 `;
 
 export const CardContainer = styled.div`
@@ -15,9 +16,6 @@ export const CardContainer = styled.div`
   width: 100%; /* Ocupa todo el ancho */
   max-width: 400px;
   height: 450px; /* Ajustamos la altura */
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-top: 60px; /* Deja espacio para el header */
 `;
 
