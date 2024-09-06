@@ -13,6 +13,7 @@ import {
   SwipeButtonContainer,
   SwipeButton,
 } from "./swipeStyled";
+import "./swipe.css";
 
 const SwipePage = () => {
   const [books, setBooks] = useState([]); // Estado para almacenar los libros
@@ -49,28 +50,25 @@ const SwipePage = () => {
   };
 
   return (
-    <SwipeContainer class="tinderCards">
-      <CardContainer class="tinderCards_container">
+    <SwipeContainer>
+      <Header />
+      <CardContainer>
         {books.map((book) => (
           <TinderCard
-            style={{
-              position: "absolute",
-              top: 0,
-            }}
+            className="swipe"
             key={book.id}
             preventSwipe={["up", "down"]}
             onSwipe={(dir) => swiped(dir, book.title)}
             onCardLeftScreen={() => outOfFrame(book.title)}
           >
-            <BookCover classname="card">
+            <BookCover>
               <img
                 src={book.cover_image}
                 alt={`Portada de ${book.title}`}
                 style={{
                   width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  borderRadius: "8px",
+                  height: "400px",
+                  objectFit: "contain",
                 }}
               />
             </BookCover>

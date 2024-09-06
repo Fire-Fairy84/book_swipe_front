@@ -11,6 +11,7 @@ export const HeaderContainer = styled.div`
   position: fixed;
   top: 0;
   z-index: 10;
+  height: 4rem;
 `;
 
 export const BackButton = styled.button`
