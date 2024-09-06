@@ -4,7 +4,7 @@ import TinderCard from "react-tinder-card";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
-import { BOOKS_ENDPOINT } from "../../config/urls";
+import { BOOKS_ENDPOINT, MEDIA_BASE_URL } from "../../config/urls"; // Importa MEDIA_BASE_URL
 import {
   SwipeContainer,
   CardContainer,
@@ -30,7 +30,8 @@ const SwipePage = () => {
             Authorization: `Token ${token}`, // Enviar el token en los encabezados
           },
         });
-        setBooks(response.data); // Almacenar los libros obtenidos
+        setBooks(response.data);
+        console.log(response.data); // Almacenar los libros obtenidos
       } catch (error) {
         console.error("Error fetching books:", error);
       }
@@ -59,7 +60,7 @@ const SwipePage = () => {
           >
             <BookCover>
               <img
-                src={`http://127.0.0.1:8000${book.cover_image}`} // Usamos la imagen del libro
+                src={book.cover_image} // No es necesario concatenar MEDIA_BASE_URL si la URL ya es completa
                 alt={`Portada de ${book.title}`}
                 style={{
                   width: "100%",
