@@ -22,7 +22,6 @@ const Home = () => {
         para intercambiar con otros usuarios. Inicia sesión para comenzar.
       </Content>
       <Button onClick={handleLoginClick}>Entrar</Button>
-      <Navbar />
     </HomeContainer>
   );
 };
