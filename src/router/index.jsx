@@ -3,7 +3,7 @@ import Layout from "../layout/Layout";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "../pages/home/Home";
-import Swipe from "../pages/Swipe";
+import Swipe from "../pages/swipe/Swipe";
 import BookDetail from "../pages/BookDetail";
 import Match from "../pages/Match";
 import UserProfile from "../pages/UserProfile";
