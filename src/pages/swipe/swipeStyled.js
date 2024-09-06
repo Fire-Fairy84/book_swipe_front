@@ -55,7 +55,7 @@ export const SwipeButton = styled.button`
   height: 50px;
   border-radius: 50%;
   font-size: 24px;
-  background-color: #f5f5f5;
+  background-color: #4b4b4b;
   border: none;
   cursor: pointer;
   display: flex;

@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center; /* Centra los elementos horizontalmente */
   justify-content: center; /* Centra los elementos verticalmente */
-  background-color: grey;
+  background-color: #987d7c;
   background-size: cover;
   width: 100vw; /* Asegura que el contenedor ocupe todo el ancho */
   height: 100vh; /* Asegura que el contenedor ocupe toda la altura */
@@ -18,6 +18,7 @@ export const FormWrapper = styled.form`
   border-radius: 8px;
   max-width: 300px;
   width: 100%;
+  background-color: #bbbbbb;
 `;
 
 export const Title = styled.h2`
