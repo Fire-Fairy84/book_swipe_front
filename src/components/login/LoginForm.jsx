@@ -40,7 +40,7 @@ const LoginForm = () => {
       localStorage.setItem("token", response.data.token);
 
       // Guardar el ID del usuario en localStorage
-      localStorage.setItem("user_id", response.data.user_id); // Asegúrate de que la respuesta contenga el user_id
+      localStorage.setItem("user_id", response.data.user_id);
 
       navigate("/swipe");
     } catch (err) {

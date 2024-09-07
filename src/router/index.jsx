@@ -7,7 +7,7 @@ import Swipe from "../pages/swipe/Swipe";
 import BookDetail from "../pages/BookDetail";
 import Match from "../pages/Match";
 import UserProfile from "../pages/UserProfile";
-import Account from "../pages/Account";
+import Profile from "../pages/profile/Profile";
 import LoginForm from "../components/login/LoginForm";
 import RegisterForm from "../components/register/RegisterForm";
 import Favorites from "../pages/Favorites";
@@ -43,8 +43,8 @@ export const router = createBrowserRouter([
         element: <BookDetail />,
       },
       {
-        path: "/account",
-        element: <Account />,
+        path: "/profile",
+        element: <Profile />,
       },
       {
         path: "/personalinfo",

@@ -1,0 +1,30 @@
+import React from "react";
+import Button from "../../components/button/Button";
+import styled from "styled-components";
+import Header from "../../components/header/Header";
+import Navbar from "../../components/navbar/Navbar";
+
+// Estilos para la página MyProfile
+const MyProfileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+`;
+
+const MyProfile = ({ onEditProfile, onMyBooks, onMyAccount, onLogout }) => {
+  return (
+    <MyProfileContainer>
+      <Header />
+      <Button text="Edit profile" onClick={onEditProfile} />
+      <Button text="My saved books" onClick={onMyBooks} />
+      <Button text="My account" onClick={onMyAccount} />
+      <Button text="Log out" onClick={onLogout} />
+      <Navbar />
+    </MyProfileContainer>
+  );
+};
+
+export default MyProfile;

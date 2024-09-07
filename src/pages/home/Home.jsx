@@ -14,14 +14,14 @@ const Home = () => {
     <HomeContainer>
       <Logo src="public/utils/images/logo.png" alt="Logo" />{" "}
       {/* Ruta de la imagen del logo */}
-      <Title>Bienvenido/a a BookSwipe</Title>
+      <Title>Welcome to BookSwipe</Title>
       <Content>
         ExpUt aliqua dolor elit proident ex aliquip commodo laborum cillum ad.
         Reprehenderit irure irure voluptate et commodo. Non ut amet irure cillum
         culpa adipisicing veniam id aute eu esse tempor dolore mollit.ora libros
         para intercambiar con otros usuarios. Inicia sesión para comenzar.
       </Content>
-      <Button onClick={handleLoginClick}>Entrar</Button>
+      <Button onClick={handleLoginClick}>Go for it!</Button>
     </HomeContainer>
   );
 };
