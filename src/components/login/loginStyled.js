@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra los elementos horizontalmente */
-  justify-content: center; /* Centra los elementos verticalmente */
-  background-color: #987d7c;
+  align-items: center;
+  justify-content: center;
+  background-color: #987d7a;
   background-size: cover;
-  width: 100vw; /* Asegura que el contenedor ocupe todo el ancho */
-  height: 100vh; /* Asegura que el contenedor ocupe toda la altura */
+  width: 100vw;
+  height: 100vh;
 `;
 
 export const FormWrapper = styled.form`

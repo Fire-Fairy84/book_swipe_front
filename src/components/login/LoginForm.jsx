@@ -17,7 +17,7 @@ const LoginForm = () => {
     password: "",
   });
 
-  const navigate = useNavigate(); // Hook para la navegación
+  const navigate = useNavigate();
   const { request, loading, error } = useApi({
     apiEndpoint: `${API_BASE_URL}login/`,
     method: "POST",
@@ -35,11 +35,14 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const response = await request(formData);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("username", formData.username);
 
-      // Redirige a la página de Swipe tras un login exitoso
-      navigate("/swipe"); // Redirige al usuario a la página de swipe
+      // Guardar el token en localStorage
+      localStorage.setItem("token", response.data.token);
+
+      // Guardar el ID del usuario en localStorage
+      localStorage.setItem("user_id", response.data.user_id); // Asegúrate de que la respuesta contenga el user_id
+
+      navigate("/swipe");
     } catch (err) {
       console.error("Login error:", err);
     }
