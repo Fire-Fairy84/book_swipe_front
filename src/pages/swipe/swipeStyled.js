@@ -14,17 +14,17 @@ export const SwipeContainer = styled.div`
 
 export const CardContainer = styled.div`
   position: relative;
-  width: 100%; /* Ocupa todo el ancho */
+  width: 100%;
   max-width: 400px;
-  height: 650px; /* Ajustamos la altura */
+  height: 650px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px; /* Deja espacio para el header */
+  margin-top: 30px;
 `;
 
 export const BookCover = styled.div`
-  width: 100%; /* Ancho total del contenedor */
+  width: 100%;
   height: 450px;
   display: flex;
   justify-content: center;
@@ -55,7 +55,7 @@ export const SwipeButton = styled.button`
   height: 50px;
   border-radius: 50%;
   font-size: 24px;
-  background-color: #f5f5f5;
+  background-color: #4b4b4b;
   border: none;
   cursor: pointer;
   display: flex;

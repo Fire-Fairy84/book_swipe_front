@@ -4,7 +4,11 @@ import TinderCard from "react-tinder-card";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
-import { BOOKS_ENDPOINT, MEDIA_BASE_URL } from "../../config/urls"; // Importa MEDIA_BASE_URL
+import {
+  BOOKS_ENDPOINT,
+  SWIPES_ENDPOINT,
+  MEDIA_BASE_URL,
+} from "../../config/urls"; // Importa los endpoints actualizados
 import {
   SwipeContainer,
   CardContainer,
@@ -32,7 +36,7 @@ const SwipePage = () => {
           },
         });
         setBooks(response.data);
-        console.log(response.data); // Almacenar los libros obtenidos
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching books:", error);
       }
@@ -40,9 +44,47 @@ const SwipePage = () => {
     fetchBooks();
   }, []);
 
-  const swiped = (direction, bookTitle) => {
+  // Función para enviar el "like" cuando el usuario desliza hacia la derecha
+  const sendLike = async (bookId) => {
+    try {
+      const token = localStorage.getItem("token"); // Obtener el token de autenticación
+      const userId = localStorage.getItem("user_id"); // Obtener el ID del usuario autenticado desde localStorage
+
+      // Verifica si el ID del usuario está presente
+      if (!userId) {
+        throw new Error("User ID is not available.");
+      }
+
+      const response = await axios.post(
+        SWIPES_ENDPOINT, // Endpoint correcto
+        {
+          user: userId, // Agregar el ID del usuario
+          book: bookId, // Agregar el ID del libro
+          liked: true, // Indicar que el libro ha recibido un "like"
+        },
+        {
+          headers: {
+            Authorization: `Token ${token}`, // Enviar el token en los encabezados
+          },
+        }
+      );
+      console.log(`Like registrado para el libro con ID: ${bookId}`);
+    } catch (error) {
+      console.error(
+        "Error al enviar el like:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  // Función que se ejecuta cuando se hace swipe en una dirección
+  const swiped = (direction, bookId) => {
     setLastDirection(direction);
-    console.log("Swiped " + direction + " on " + bookTitle);
+    console.log("Swiped " + direction + " on book with ID " + bookId);
+
+    if (direction === "right") {
+      sendLike(bookId); // Enviar el like si se desliza hacia la derecha
+    }
   };
 
   const outOfFrame = (bookTitle) => {
@@ -58,7 +100,7 @@ const SwipePage = () => {
             className="swipe"
             key={book.id}
             preventSwipe={["up", "down"]}
-            onSwipe={(dir) => swiped(dir, book.title)}
+            onSwipe={(dir) => swiped(dir, book.id)} // Pasar el ID del libro a la función
             onCardLeftScreen={() => outOfFrame(book.title)}
           >
             <BookCover>
