@@ -10,6 +10,8 @@ import RegisterForm from "../components/register/RegisterForm";
 import Logout from "../components/logout/Logout";
 import Favorites from "../pages/favorites/Favorites";
 import MySettings from "../pages/mySettings/MySettings";
+import BookShelf from "../pages/bookshelf/BookShelf";
+import AddBook from "../pages/addbook/AddBook";
 import Match from "../pages/Match";
 import PersonalInfo from "../pages/PersonalInfo";
 import BookDetail from "../pages/BookDetail";
@@ -22,15 +24,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />, // Ruta pública
+        element: <Home />,
       },
       {
         path: "/login",
-        element: <LoginForm />, // Ruta pública
+        element: <LoginForm />,
       },
       {
         path: "/register",
-        element: <RegisterForm />, // Ruta pública
+        element: <RegisterForm />,
       },
       {
         path: "/logout",
@@ -42,7 +44,7 @@ export const router = createBrowserRouter([
           <ProtectedRoute>
             <Swipe />
           </ProtectedRoute>
-        ), // Ruta protegida
+        ),
       },
       {
         path: "/profile",
@@ -50,7 +52,7 @@ export const router = createBrowserRouter([
           <ProtectedRoute>
             <Profile />
           </ProtectedRoute>
-        ), // Ruta protegida
+        ),
       },
       {
         path: "/favorites",
@@ -58,7 +60,7 @@ export const router = createBrowserRouter([
           <ProtectedRoute>
             <Favorites />
           </ProtectedRoute>
-        ), // Ruta protegida
+        ),
       },
       {
         path: "/messages",
@@ -66,7 +68,7 @@ export const router = createBrowserRouter([
           <ProtectedRoute>
             <Messages />
           </ProtectedRoute>
-        ), // Ruta protegida
+        ),
       },
       {
         path: "/mysettings",
@@ -74,7 +76,23 @@ export const router = createBrowserRouter([
           <ProtectedRoute>
             <MySettings />
           </ProtectedRoute>
-        ), // Ruta protegida
+        ),
+      },
+      {
+        path: "/bookshelf",
+        element: (
+          <ProtectedRoute>
+            <BookShelf />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/addbook",
+        element: (
+          <ProtectedRoute>
+            <AddBook />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/match",
@@ -82,7 +100,7 @@ export const router = createBrowserRouter([
           <ProtectedRoute>
             <Match />
           </ProtectedRoute>
-        ), // Ruta protegida
+        ),
       },
       {
         path: "/book/:id",
@@ -90,7 +108,7 @@ export const router = createBrowserRouter([
           <ProtectedRoute>
             <BookDetail />
           </ProtectedRoute>
-        ), // Ruta protegida
+        ),
       },
       {
         path: "/personalinfo",
@@ -98,7 +116,7 @@ export const router = createBrowserRouter([
           <ProtectedRoute>
             <PersonalInfo />
           </ProtectedRoute>
-        ), // Ruta protegida
+        ),
       },
     ],
   },
