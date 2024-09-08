@@ -10,6 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import useApi from "../../services/useApi";
 import { API_BASE_URL } from "../../config/urls";
+import Header from "../header/Header";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -58,6 +59,7 @@ const RegisterForm = () => {
 
   return (
     <Container>
+      <Header />
       <FormWrapper onSubmit={handleSubmit}>
         <Title>Create your account</Title>
         {renderError()}

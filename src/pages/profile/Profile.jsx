@@ -3,7 +3,7 @@ import Button from "../../components/button/Button";
 import styled from "styled-components";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
-import { useNavigate } from "react-router-dom"; // Asegúrate de tener useNavigate
+import { useNavigate } from "react-router-dom";
 
 // Estilos para la página MyProfile
 const MyProfileContainer = styled.div`
@@ -18,16 +18,19 @@ const MyProfileContainer = styled.div`
 const MyProfile = ({ onEditProfile, onMyBooks, onMyAccount }) => {
   const navigate = useNavigate();
 
-  // Agregar la lógica de logout para redirigir al componente de Logout
   const handleLogout = () => {
     navigate("/logout");
+  };
+
+  const handleBookShelf = () => {
+    navigate("/bookshelf");
   };
 
   return (
     <MyProfileContainer>
       <Header />
       <Button text="Edit profile" onClick={onEditProfile} />
-      <Button text="Book shelf" onClick={onMyBooks} />
+      <Button text="Book shelf" onClick={handleBookShelf} />
       <Button text="My account" onClick={onMyAccount} />
       <Button text="Log out" onClick={handleLogout} />
       <Navbar />
