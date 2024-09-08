@@ -14,14 +14,15 @@ const Home = () => {
     <HomeContainer>
       <Logo src="public/utils/images/logo.png" alt="Logo" />{" "}
       {/* Ruta de la imagen del logo */}
-      <Title>Bienvenido/a a BookSwipe</Title>
+      <Title>Welcome to BookSwipe</Title>
       <Content>
-        ExpUt aliqua dolor elit proident ex aliquip commodo laborum cillum ad.
-        Reprehenderit irure irure voluptate et commodo. Non ut amet irure cillum
-        culpa adipisicing veniam id aute eu esse tempor dolore mollit.ora libros
-        para intercambiar con otros usuarios. Inicia sesión para comenzar.
+        Welcome to our community of book lovers! Got books you no longer read?
+        Looking for new literary gems? Here you can trade books with others, and
+        find your next great read. Swipe left if it's not your thing, or right
+        if you love what you see. If both of you match on books, the trade is
+        on! Connect, explore, and let the pages keep turning.
       </Content>
-      <Button onClick={handleLoginClick}>Entrar</Button>
+      <Button onClick={handleLoginClick}>Let's explore!</Button>
     </HomeContainer>
   );
 };

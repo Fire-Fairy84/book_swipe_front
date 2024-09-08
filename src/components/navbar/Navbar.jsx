@@ -1,13 +1,17 @@
 import React from "react";
-import { NavbarContainer, NavButton } from "../navbar/styles";
+import { NavbarContainer, NavButton } from "./navbarStyled";
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/button/Button";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <NavbarContainer>
-      <NavButton>Button 1</NavButton>
-      <NavButton>Button 2</NavButton>
-      <NavButton>Button 3</NavButton>
-      <NavButton>Button 4</NavButton>
+      <NavButton onClick={() => navigate("/profile")}>Profile</NavButton>
+      <NavButton onClick={() => navigate("/messages")}>Messages</NavButton>
+      <NavButton onClick={() => navigate("/favorites")}>Favorites</NavButton>
+      <NavButton onClick={() => navigate("/mysettings")}>Settings</NavButton>
     </NavbarContainer>
   );
 };

@@ -6,7 +6,7 @@ export const HomeContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding-bottom: 60px; /* Espacio para el Navbar */
+  padding-bottom: 60px;
 `;
 
 export const Logo = styled.img`
@@ -18,16 +18,16 @@ export const Logo = styled.img`
 export const Title = styled.h1`
   font-size: 24px;
   color: #007a8c;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   text-align: center;
 `;
 
 export const Content = styled.p`
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
-  max-width: 600px;
+  max-width: 370px;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 `;
 
 export const Button = styled.button`

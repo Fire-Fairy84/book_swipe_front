@@ -1,17 +1,19 @@
 import React from "react";
 import Layout from "../layout/Layout";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Swipe from "../pages/swipe/Swipe";
-import BookDetail from "../pages/BookDetail";
-import Match from "../pages/Match";
-import UserProfile from "../pages/UserProfile";
-import Account from "../pages/Account";
+import Messages from "../pages/messages/Messages";
+import Profile from "../pages/profile/Profile";
 import LoginForm from "../components/login/LoginForm";
 import RegisterForm from "../components/register/RegisterForm";
-import Favorites from "../pages/Favorites";
+import Logout from "../components/logout/Logout";
+import Favorites from "../pages/favorites/Favorites";
+import MySettings from "../pages/mySettings/MySettings";
+import Match from "../pages/Match";
 import PersonalInfo from "../pages/PersonalInfo";
+import BookDetail from "../pages/BookDetail";
+import ProtectedRoute from "../router/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -20,43 +22,83 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Home />, // Ruta pública
       },
       {
         path: "/login",
-        element: <LoginForm />,
+        element: <LoginForm />, // Ruta pública
       },
       {
         path: "/register",
-        element: <RegisterForm />,
+        element: <RegisterForm />, // Ruta pública
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
       },
       {
         path: "/swipe",
-        element: <Swipe />,
+        element: (
+          <ProtectedRoute>
+            <Swipe />
+          </ProtectedRoute>
+        ), // Ruta protegida
       },
       {
-        path: "/match",
-        element: <Match />,
-      },
-      {
-        path: "/book/:id",
-        element: <BookDetail />,
-      },
-      {
-        path: "/account",
-        element: <Account />,
-      },
-      {
-        path: "/personalinfo",
-        element: <PersonalInfo />,
+        path: "/profile",
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ), // Ruta protegida
       },
       {
         path: "/favorites",
-        element: <Favorites />,
+        element: (
+          <ProtectedRoute>
+            <Favorites />
+          </ProtectedRoute>
+        ), // Ruta protegida
       },
       {
-        path: "/userprofile",
-        element: <UserProfile />,
+        path: "/messages",
+        element: (
+          <ProtectedRoute>
+            <Messages />
+          </ProtectedRoute>
+        ), // Ruta protegida
+      },
+      {
+        path: "/mysettings",
+        element: (
+          <ProtectedRoute>
+            <MySettings />
+          </ProtectedRoute>
+        ), // Ruta protegida
+      },
+      {
+        path: "/match",
+        element: (
+          <ProtectedRoute>
+            <Match />
+          </ProtectedRoute>
+        ), // Ruta protegida
+      },
+      {
+        path: "/book/:id",
+        element: (
+          <ProtectedRoute>
+            <BookDetail />
+          </ProtectedRoute>
+        ), // Ruta protegida
+      },
+      {
+        path: "/personalinfo",
+        element: (
+          <ProtectedRoute>
+            <PersonalInfo />
+          </ProtectedRoute>
+        ), // Ruta protegida
       },
     ],
   },

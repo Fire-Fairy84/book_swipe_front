@@ -16,7 +16,7 @@ export const HeaderContainer = styled.div`
 
 export const BackButton = styled.button`
   background: none;
-  border: none;
+  border: 1px solid;
   font-size: 16px;
   cursor: pointer;
   color: #007a8c;

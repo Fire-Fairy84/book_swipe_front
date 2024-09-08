@@ -10,6 +10,7 @@ import {
 } from "../login/loginStyled";
 import useApi from "../../services/useApi";
 import { API_BASE_URL } from "../../config/urls";
+import Header from "../header/Header";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -40,7 +41,7 @@ const LoginForm = () => {
       localStorage.setItem("token", response.data.token);
 
       // Guardar el ID del usuario en localStorage
-      localStorage.setItem("user_id", response.data.user_id); // Asegúrate de que la respuesta contenga el user_id
+      localStorage.setItem("user_id", response.data.user_id);
 
       navigate("/swipe");
     } catch (err) {
@@ -64,6 +65,7 @@ const LoginForm = () => {
 
   return (
     <Container>
+      <Header />
       <FormWrapper onSubmit={handleSubmit}>
         <Title>Log In</Title>
         {renderError()}

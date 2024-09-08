@@ -6,12 +6,12 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate(-1); // Regresa a la página anterior
+    navigate(-1);
   };
 
   return (
     <HeaderContainer>
-      <BackButton onClick={handleBack}>Atrás</BackButton>
+      <BackButton onClick={handleBack}>Back</BackButton>
       <Logo src="public\utils\images\logo.png" alt="Logo" />
     </HeaderContainer>
   );
