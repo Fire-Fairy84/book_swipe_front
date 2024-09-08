@@ -9,9 +9,9 @@ const Navbar = () => {
   return (
     <NavbarContainer>
       <NavButton onClick={() => navigate("/profile")}>Profile</NavButton>
-      <NavButton>Button 2</NavButton>
-      <NavButton>Button 3</NavButton>
-      <NavButton>Button 4</NavButton>
+      <NavButton onClick={() => navigate("/messages")}>Messages</NavButton>
+      <NavButton onClick={() => navigate("/favorites")}>Favorites</NavButton>
+      <NavButton onClick={() => navigate("/mysettings")}>Settings</NavButton>
     </NavbarContainer>
   );
 };

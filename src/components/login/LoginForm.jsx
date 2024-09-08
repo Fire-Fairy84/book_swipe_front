@@ -10,6 +10,7 @@ import {
 } from "../login/loginStyled";
 import useApi from "../../services/useApi";
 import { API_BASE_URL } from "../../config/urls";
+import Header from "../header/Header";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -64,6 +65,7 @@ const LoginForm = () => {
 
   return (
     <Container>
+      <Header />
       <FormWrapper onSubmit={handleSubmit}>
         <Title>Log In</Title>
         {renderError()}

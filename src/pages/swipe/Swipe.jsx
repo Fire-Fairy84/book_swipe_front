@@ -8,7 +8,7 @@ import {
   BOOKS_ENDPOINT,
   SWIPES_ENDPOINT,
   MEDIA_BASE_URL,
-} from "../../config/urls"; // Importa los endpoints actualizados
+} from "../../config/urls";
 import {
   SwipeContainer,
   CardContainer,
@@ -83,7 +83,7 @@ const SwipePage = () => {
     console.log("Swiped " + direction + " on book with ID " + bookId);
 
     if (direction === "right") {
-      sendLike(bookId); // Enviar el like si se desliza hacia la derecha
+      sendLike(bookId);
     }
   };
 
