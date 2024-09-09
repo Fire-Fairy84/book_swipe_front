@@ -3,8 +3,11 @@ import axios from "axios";
 import { BOOKS_ENDPOINT } from "../../config/urls";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 
 const AddBookContainer = styled.div`
+  margin-top: 90px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -12,6 +15,7 @@ const AddBookContainer = styled.div`
 `;
 
 const Form = styled.form`
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -103,6 +107,7 @@ const AddBook = () => {
 
   return (
     <AddBookContainer>
+      <Header />
       <h2>Add a New Book</h2>
       <Form onSubmit={handleSubmit}>
         <Input
@@ -137,6 +142,7 @@ const AddBook = () => {
         />
         <Button type="submit">Add Book</Button>
       </Form>
+      <Navbar />
     </AddBookContainer>
   );
 };

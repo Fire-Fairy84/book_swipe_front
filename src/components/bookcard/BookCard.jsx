@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { MEDIA_BASE_URL } from "../../config/urls";
 
-// Estilos para la tarjeta del libro
 const CardContainer = styled.div`
-  background-color: #fff;
+  background-color: #313131;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 10px;
@@ -12,6 +11,7 @@ const CardContainer = styled.div`
   width: 200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  position: relative;
 `;
 
 const BookImage = styled.img`
@@ -28,15 +28,35 @@ const BookTitle = styled.h3`
 
 const BookAuthor = styled.p`
   font-size: 14px;
-  color: #555;
+  color: #a3a3a3;
 `;
 
-const BookCard = ({ book }) => {
+const DeleteButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darkred;
+  }
+`;
+
+const BookCard = ({ book, onDelete }) => {
   return (
     <CardContainer>
+      <DeleteButton onClick={() => onDelete(book.id)}>Delete</DeleteButton>
       <BookImage
         src={`${MEDIA_BASE_URL}${book.cover_image}`}
         alt={book.title}
+        style={{
+          objectFit: "contain",
+        }}
       />
       <BookTitle>{book.title}</BookTitle>
       <BookAuthor>{book.author}</BookAuthor>

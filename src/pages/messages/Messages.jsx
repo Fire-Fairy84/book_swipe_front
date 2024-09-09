@@ -7,7 +7,6 @@ function UserProfile() {
   const { id } = useParams();
   return (
     <div>
-      <Header />
       <h1>Mensajes del Usuario {id}</h1>
       {/* Mostrar libros del usuario */}
       <Navbar />
