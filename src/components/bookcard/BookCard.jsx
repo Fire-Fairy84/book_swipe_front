@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { MEDIA_BASE_URL } from "../../config/urls";
 
-// Estilos para la tarjeta del libro
 const CardContainer = styled.div`
-  background-color: #fff;
+  background-color: #313131;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 10px;
@@ -28,7 +27,7 @@ const BookTitle = styled.h3`
 
 const BookAuthor = styled.p`
   font-size: 14px;
-  color: #555;
+  color: #a3a3a3;
 `;
 
 const BookCard = ({ book }) => {
@@ -37,6 +36,9 @@ const BookCard = ({ book }) => {
       <BookImage
         src={`${MEDIA_BASE_URL}${book.cover_image}`}
         alt={book.title}
+        style={{
+          objectFit: "contain",
+        }}
       />
       <BookTitle>{book.title}</BookTitle>
       <BookAuthor>{book.author}</BookAuthor>

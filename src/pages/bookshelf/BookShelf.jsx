@@ -4,8 +4,11 @@ import { API_BASE_URL } from "../../config/urls";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import BookCard from "../../components/bookcard/BookCard";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 
 const BookShelfContainer = styled.div`
+  margin-top: 90px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -72,11 +75,12 @@ const BookShelf = () => {
   }
 
   if (error) {
-    return <p>Error: {error}</p>; // Mostrar el valor de error.detail si está presente
+    return <p>Error: {error}</p>;
   }
 
   return (
     <BookShelfContainer>
+      <Header />
       <h2>My Book Shelf</h2>
       <AddBookButton onClick={() => navigate("/addbook")}>
         Add New Book
@@ -88,6 +92,7 @@ const BookShelf = () => {
           <p>You have no books in your shelf.</p>
         )}
       </GridContainer>
+      <Navbar />
     </BookShelfContainer>
   );
 };
