@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../../config/urls";
+import { API_BASE_URL, BOOKS_ENDPOINT } from "../../config/urls";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import BookCard from "../../components/bookcard/BookCard";
@@ -9,7 +9,7 @@ import Header from "../../components/header/Header";
 
 const BookShelfContainer = styled.div`
   margin-top: 90px;
-  padding: 20px;
+  padding: 20px, 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +18,7 @@ const BookShelfContainer = styled.div`
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+
   width: 100%;
   max-width: 1200px;
 `;
@@ -57,7 +57,6 @@ const BookShelf = () => {
         setBooks(response.data);
         setLoading(false);
       } catch (err) {
-        // Verificar si el error es un objeto y tiene la clave "detail"
         if (err.response && err.response.data && err.response.data.detail) {
           setError(err.response.data.detail);
         } else {
@@ -69,6 +68,23 @@ const BookShelf = () => {
 
     fetchBooks();
   }, []);
+
+  // Función para eliminar un libro
+  const handleDelete = async (bookId) => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`${BOOKS_ENDPOINT}${bookId}/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+
+      // Actualizar la lista de libros después de eliminar uno
+      setBooks(books.filter((book) => book.id !== bookId));
+    } catch (err) {
+      console.error("Error deleting book:", err.message);
+    }
+  };
 
   if (loading) {
     return <p>Loading books...</p>;
@@ -87,7 +103,9 @@ const BookShelf = () => {
       </AddBookButton>
       <GridContainer>
         {books.length > 0 ? (
-          books.map((book) => <BookCard key={book.id} book={book} />)
+          books.map((book) => (
+            <BookCard key={book.id} book={book} onDelete={handleDelete} />
+          ))
         ) : (
           <p>You have no books in your shelf.</p>
         )}

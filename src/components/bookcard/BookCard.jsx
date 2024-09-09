@@ -11,6 +11,7 @@ const CardContainer = styled.div`
   width: 200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  position: relative;
 `;
 
 const BookImage = styled.img`
@@ -30,9 +31,26 @@ const BookAuthor = styled.p`
   color: #a3a3a3;
 `;
 
-const BookCard = ({ book }) => {
+const DeleteButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darkred;
+  }
+`;
+
+const BookCard = ({ book, onDelete }) => {
   return (
     <CardContainer>
+      <DeleteButton onClick={() => onDelete(book.id)}>Delete</DeleteButton>
       <BookImage
         src={`${MEDIA_BASE_URL}${book.cover_image}`}
         alt={book.title}
