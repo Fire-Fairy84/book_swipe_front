@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { MEDIA_BASE_URL } from "../../config/urls";
 
 // Estilos para la tarjeta del libro
 const CardContainer = styled.div`
@@ -33,7 +34,10 @@ const BookAuthor = styled.p`
 const BookCard = ({ book }) => {
   return (
     <CardContainer>
-      <BookImage src={book.cover_image} alt={`Cover of ${book.title}`} />
+      <BookImage
+        src={`${MEDIA_BASE_URL}${book.cover_image}`}
+        alt={book.title}
+      />
       <BookTitle>{book.title}</BookTitle>
       <BookAuthor>{book.author}</BookAuthor>
     </CardContainer>

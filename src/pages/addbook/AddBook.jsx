@@ -24,6 +24,18 @@ const Input = styled.input`
   border-radius: 8px;
 `;
 
+const TextArea = styled.textarea`
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  resize: none;
+`;
+
+const FileInput = styled.input`
+  padding: 10px;
+  border: none;
+`;
+
 const Button = styled.button`
   background-color: #007a8c;
   color: white;
@@ -42,8 +54,10 @@ const AddBook = () => {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
-    cover_image: "",
+    description: "", // Añadimos el campo description
+    cover_image: null,
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -54,16 +68,34 @@ const AddBook = () => {
     });
   };
 
+  const handleFileChange = (e) => {
+    setFormData({
+      ...formData,
+      cover_image: e.target.files[0],
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.post(BOOKS_ENDPOINT, formData, {
+
+      const data = new FormData();
+      data.append("title", formData.title);
+      data.append("author", formData.author);
+      data.append("description", formData.description); // Enviamos la descripción
+      if (formData.cover_image) {
+        data.append("cover_image", formData.cover_image); // Solo añadir la imagen si existe
+      }
+
+      await axios.post(BOOKS_ENDPOINT, data, {
         headers: {
           Authorization: `Token ${token}`,
+          "Content-Type": "multipart/form-data",
         },
       });
-      navigate("/bookshelf"); // Redirigir a la estantería después de añadir el libro
+
+      navigate("/bookshelf");
     } catch (err) {
       console.error("Error adding book:", err.message);
     }
@@ -79,6 +111,7 @@ const AddBook = () => {
           value={formData.title}
           onChange={handleChange}
           placeholder="Title"
+          required
         />
         <Input
           type="text"
@@ -86,13 +119,21 @@ const AddBook = () => {
           value={formData.author}
           onChange={handleChange}
           placeholder="Author"
+          required
         />
-        <Input
-          type="text"
-          name="cover_image"
-          value={formData.cover_image}
+        <TextArea
+          name="description"
+          value={formData.description}
           onChange={handleChange}
-          placeholder="Cover Image URL"
+          placeholder="Description"
+          rows="4"
+          required
+        />
+        <FileInput
+          type="file"
+          name="cover_image"
+          onChange={handleFileChange}
+          accept="image/*"
         />
         <Button type="submit">Add Book</Button>
       </Form>
