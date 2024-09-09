@@ -20,7 +20,7 @@ import {
 import "./swipe.css";
 
 const SwipePage = () => {
-  const [books, setBooks] = useState([]); // Estado para almacenar los libros
+  const [books, setBooks] = useState([]);
   const [lastDirection, setLastDirection] = useState(null);
   const navigate = useNavigate();
 
@@ -28,15 +28,19 @@ const SwipePage = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const token = localStorage.getItem("token"); // Obtén el token desde localStorage
+        const token = localStorage.getItem("token");
+        const userId = localStorage.getItem("user_id");
 
         const response = await axios.get(BOOKS_ENDPOINT, {
           headers: {
-            Authorization: `Token ${token}`, // Enviar el token en los encabezados
+            Authorization: `Token ${token}`,
           },
         });
-        setBooks(response.data);
-        console.log(response.data);
+
+        const filteredBooks = response.data.filter(
+          (book) => book.user !== parseInt(userId)
+        );
+        setBooks(filteredBooks);
       } catch (error) {
         console.error("Error fetching books:", error);
       }
@@ -47,31 +51,30 @@ const SwipePage = () => {
   // Función para enviar el "like" cuando el usuario desliza hacia la derecha
   const sendLike = async (bookId) => {
     try {
-      const token = localStorage.getItem("token"); // Obtener el token de autenticación
-      const userId = localStorage.getItem("user_id"); // Obtener el ID del usuario autenticado desde localStorage
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("user_id");
 
-      // Verifica si el ID del usuario está presente
       if (!userId) {
         throw new Error("User ID is not available.");
       }
 
       const response = await axios.post(
-        SWIPES_ENDPOINT, // Endpoint correcto
+        SWIPES_ENDPOINT,
         {
-          user: userId, // Agregar el ID del usuario
-          book: bookId, // Agregar el ID del libro
-          liked: true, // Indicar que el libro ha recibido un "like"
+          user: userId,
+          book: bookId,
+          liked: true,
         },
         {
           headers: {
-            Authorization: `Token ${token}`, // Enviar el token en los encabezados
+            Authorization: `Token ${token}`,
           },
         }
       );
-      console.log(`Like registrado para el libro con ID: ${bookId}`);
+      console.log(`Like registered for the book with ID: ${bookId}`);
     } catch (error) {
       console.error(
-        "Error al enviar el like:",
+        "Error trying to send the like:",
         error.response?.data || error.message
       );
     }
@@ -100,7 +103,7 @@ const SwipePage = () => {
             className="swipe"
             key={book.id}
             preventSwipe={["up", "down"]}
-            onSwipe={(dir) => swiped(dir, book.id)} // Pasar el ID del libro a la función
+            onSwipe={(dir) => swiped(dir, book.id)}
             onCardLeftScreen={() => outOfFrame(book.title)}
           >
             <BookCover>

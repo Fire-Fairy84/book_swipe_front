@@ -87,9 +87,9 @@ const AddBook = () => {
       const data = new FormData();
       data.append("title", formData.title);
       data.append("author", formData.author);
-      data.append("description", formData.description); // Enviamos la descripción
+      data.append("description", formData.description);
       if (formData.cover_image) {
-        data.append("cover_image", formData.cover_image); // Solo añadir la imagen si existe
+        data.append("cover_image", formData.cover_image);
       }
 
       await axios.post(BOOKS_ENDPOINT, data, {
@@ -101,7 +101,11 @@ const AddBook = () => {
 
       navigate("/bookshelf");
     } catch (err) {
-      console.error("Error adding book:", err.message);
+      if (err.response) {
+        console.error("Error adding book:", err.response.data);
+      } else {
+        console.error("Error adding book:", err.message);
+      }
     }
   };
 
