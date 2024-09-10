@@ -10,13 +10,17 @@ import {
 } from "../login/loginStyled";
 import useApi from "../../services/useApi";
 import { API_BASE_URL } from "../../config/urls";
-import Header from "../header/Header";
+import UserNotification from "../../components/userNotification/UserNotification";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const navigate = useNavigate();
   const { request, loading, error } = useApi({
@@ -37,15 +41,20 @@ const LoginForm = () => {
     try {
       const response = await request(formData);
 
-      // Guardar el token en localStorage
       localStorage.setItem("token", response.data.token);
-
-      // Guardar el ID del usuario en localStorage
       localStorage.setItem("user_id", response.data.user_id);
 
-      navigate("/swipe");
+      setIsSuccess(true);
+      setNotificationMessage("Login successful!");
+      setShowNotification(true);
+
+      setTimeout(() => {
+        navigate("/swipe");
+      }, 2000);
     } catch (err) {
-      console.error("Login error:", err);
+      setIsSuccess(false);
+      setNotificationMessage("Login failed. Please check your credentials.");
+      setShowNotification(true);
     }
   };
 
@@ -65,7 +74,12 @@ const LoginForm = () => {
 
   return (
     <Container>
-      <Header />
+      <UserNotification
+        message={notificationMessage}
+        success={isSuccess}
+        show={showNotification}
+        onClose={() => setShowNotification(false)}
+      />
       <FormWrapper onSubmit={handleSubmit}>
         <Title>Log In</Title>
         {renderError()}

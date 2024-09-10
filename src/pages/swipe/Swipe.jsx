@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TinderCard from "react-tinder-card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
@@ -23,11 +25,10 @@ import "./swipe.css";
 const SwipePage = () => {
   const [books, setBooks] = useState([]);
   const [lastDirection, setLastDirection] = useState(null);
-  const [receivedLikes, setReceivedLikes] = useState([]); // Para almacenar los likes recibidos
-  const [matchMessage, setMatchMessage] = useState(""); // Para almacenar el mensaje de match
+  const [receivedLikes, setReceivedLikes] = useState([]);
+  const [matchMessage, setMatchMessage] = useState("");
   const navigate = useNavigate();
 
-  // Función para obtener los libros desde la API
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -40,15 +41,13 @@ const SwipePage = () => {
           },
         });
 
-        // Filtrar los libros que no pertenecen al usuario autenticado
         const filteredBooks = response.data.filter(
           (book) => book.user !== parseInt(userId)
         );
         setBooks(filteredBooks);
 
-        // También obtener los likes recibidos
         const receivedLikesResponse = await axios.get(
-          `${SWIPES_ENDPOINT}?received_likes=true`, // Endpoint para obtener likes recibidos
+          `${SWIPES_ENDPOINT}?received_likes=true`,
           {
             headers: {
               Authorization: `Token ${token}`,
@@ -64,8 +63,7 @@ const SwipePage = () => {
     fetchBooks();
   }, []);
 
-  // Función para enviar el "like" cuando el usuario desliza hacia la derecha
-  const sendLike = async (bookId, bookOwnerId) => {
+  const sendLike = async (bookId, bookOwnerId, bookOwnerName) => {
     try {
       const token = localStorage.getItem("token");
       const userId = localStorage.getItem("user_id");
@@ -74,7 +72,6 @@ const SwipePage = () => {
         throw new Error("User ID is not available.");
       }
 
-      // Enviar like al libro
       const response = await axios.post(
         SWIPES_ENDPOINT,
         {
@@ -90,8 +87,7 @@ const SwipePage = () => {
       );
       console.log(`Like registered for the book with ID: ${bookId}`);
 
-      // Verificar si existe un match
-      checkForMatch(bookOwnerId);
+      checkForMatch(bookOwnerId, bookOwnerName);
     } catch (error) {
       console.error(
         "Error trying to send the like:",
@@ -100,28 +96,25 @@ const SwipePage = () => {
     }
   };
 
-  // Función para verificar si existe un match
-  const checkForMatch = (bookOwnerId) => {
-    // Verificar si el usuario propietario del libro ha dado like a alguno de los libros del usuario autenticado
+  const checkForMatch = (bookOwnerId, bookOwnerName) => {
     const matchFound = receivedLikes.some(
       (like) => like.user === bookOwnerId && like.liked === true
     );
 
     if (matchFound) {
-      setMatchMessage("¡Has hecho match con el usuario!");
+      setMatchMessage(`¡Has hecho match con ${bookOwnerName}!`);
       setTimeout(() => {
         setMatchMessage("");
       }, 2500);
     }
   };
 
-  // Función que se ejecuta cuando se hace swipe en una dirección
-  const swiped = (direction, bookId, bookOwnerId) => {
+  const swiped = (direction, bookId, bookOwnerId, bookOwnerName) => {
     setLastDirection(direction);
     console.log("Swiped " + direction + " on book with ID " + bookId);
 
     if (direction === "right") {
-      sendLike(bookId, bookOwnerId); // Pasar también el ID del dueño del libro
+      sendLike(bookId, bookOwnerId, bookOwnerName);
     }
   };
 
@@ -140,7 +133,7 @@ const SwipePage = () => {
             className="swipe"
             key={book.id}
             preventSwipe={["up", "down"]}
-            onSwipe={(dir) => swiped(dir, book.id, book.user)} // Pasar el ID del dueño del libro
+            onSwipe={(dir) => swiped(dir, book.id, book.user, book.user_name)}
             onCardLeftScreen={() => outOfFrame(book.title)}
           >
             <BookCover>
@@ -162,8 +155,12 @@ const SwipePage = () => {
         ))}
       </CardContainer>
       <SwipeButtonContainer>
-        <SwipeButton>X</SwipeButton>
-        <SwipeButton>V</SwipeButton>
+        <SwipeButton>
+          <FontAwesomeIcon icon={faThumbsDown} />
+        </SwipeButton>
+        <SwipeButton>
+          <FontAwesomeIcon icon={faThumbsUp} />
+        </SwipeButton>
       </SwipeButtonContainer>
       <Navbar />
     </SwipeContainer>
