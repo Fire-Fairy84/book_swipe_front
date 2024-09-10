@@ -16,74 +16,112 @@ import {
   BookInfo,
   SwipeButtonContainer,
   SwipeButton,
+  MatchMessage,
 } from "./swipeStyled";
 import "./swipe.css";
 
 const SwipePage = () => {
-  const [books, setBooks] = useState([]); // Estado para almacenar los libros
+  const [books, setBooks] = useState([]);
   const [lastDirection, setLastDirection] = useState(null);
+  const [receivedLikes, setReceivedLikes] = useState([]); // Para almacenar los likes recibidos
+  const [matchMessage, setMatchMessage] = useState(""); // Para almacenar el mensaje de match
   const navigate = useNavigate();
 
   // Función para obtener los libros desde la API
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const token = localStorage.getItem("token"); // Obtén el token desde localStorage
+        const token = localStorage.getItem("token");
+        const userId = localStorage.getItem("user_id");
 
         const response = await axios.get(BOOKS_ENDPOINT, {
           headers: {
-            Authorization: `Token ${token}`, // Enviar el token en los encabezados
+            Authorization: `Token ${token}`,
           },
         });
-        setBooks(response.data);
-        console.log(response.data);
+
+        // Filtrar los libros que no pertenecen al usuario autenticado
+        const filteredBooks = response.data.filter(
+          (book) => book.user !== parseInt(userId)
+        );
+        setBooks(filteredBooks);
+
+        // También obtener los likes recibidos
+        const receivedLikesResponse = await axios.get(
+          `${SWIPES_ENDPOINT}?received_likes=true`, // Endpoint para obtener likes recibidos
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+          }
+        );
+        setReceivedLikes(receivedLikesResponse.data);
       } catch (error) {
-        console.error("Error fetching books:", error);
+        console.error("Error fetching books or likes:", error);
       }
     };
+
     fetchBooks();
   }, []);
 
   // Función para enviar el "like" cuando el usuario desliza hacia la derecha
-  const sendLike = async (bookId) => {
+  const sendLike = async (bookId, bookOwnerId) => {
     try {
-      const token = localStorage.getItem("token"); // Obtener el token de autenticación
-      const userId = localStorage.getItem("user_id"); // Obtener el ID del usuario autenticado desde localStorage
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("user_id");
 
-      // Verifica si el ID del usuario está presente
       if (!userId) {
         throw new Error("User ID is not available.");
       }
 
+      // Enviar like al libro
       const response = await axios.post(
-        SWIPES_ENDPOINT, // Endpoint correcto
+        SWIPES_ENDPOINT,
         {
-          user: userId, // Agregar el ID del usuario
-          book: bookId, // Agregar el ID del libro
-          liked: true, // Indicar que el libro ha recibido un "like"
+          user: userId,
+          book: bookId,
+          liked: true,
         },
         {
           headers: {
-            Authorization: `Token ${token}`, // Enviar el token en los encabezados
+            Authorization: `Token ${token}`,
           },
         }
       );
-      console.log(`Like registrado para el libro con ID: ${bookId}`);
+      console.log(`Like registered for the book with ID: ${bookId}`);
+
+      // Verificar si existe un match
+      checkForMatch(bookOwnerId);
     } catch (error) {
       console.error(
-        "Error al enviar el like:",
+        "Error trying to send the like:",
         error.response?.data || error.message
       );
     }
   };
 
+  // Función para verificar si existe un match
+  const checkForMatch = (bookOwnerId) => {
+    // Verificar si el usuario propietario del libro ha dado like a alguno de los libros del usuario autenticado
+    const matchFound = receivedLikes.some(
+      (like) => like.user === bookOwnerId && like.liked === true
+    );
+
+    if (matchFound) {
+      setMatchMessage("¡Has hecho match con el usuario!");
+      setTimeout(() => {
+        setMatchMessage("");
+      }, 2500);
+    }
+  };
+
   // Función que se ejecuta cuando se hace swipe en una dirección
-  const swiped = (direction, bookId) => {
+  const swiped = (direction, bookId, bookOwnerId) => {
     setLastDirection(direction);
     console.log("Swiped " + direction + " on book with ID " + bookId);
 
     if (direction === "right") {
-      sendLike(bookId);
+      sendLike(bookId, bookOwnerId); // Pasar también el ID del dueño del libro
     }
   };
 
@@ -94,13 +132,15 @@ const SwipePage = () => {
   return (
     <SwipeContainer>
       <Header />
+      {matchMessage && <MatchMessage>{matchMessage}</MatchMessage>}{" "}
+      {/* Mostrar mensaje de match */}
       <CardContainer>
         {books.map((book) => (
           <TinderCard
             className="swipe"
             key={book.id}
             preventSwipe={["up", "down"]}
-            onSwipe={(dir) => swiped(dir, book.id)} // Pasar el ID del libro a la función
+            onSwipe={(dir) => swiped(dir, book.id, book.user)} // Pasar el ID del dueño del libro
             onCardLeftScreen={() => outOfFrame(book.title)}
           >
             <BookCover>
