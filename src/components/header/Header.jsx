@@ -6,12 +6,12 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate(-1);
+    navigate("/swipe");
   };
 
   return (
     <HeaderContainer>
-      <BackButton onClick={handleBack}>Back</BackButton>
+      <BackButton onClick={handleBack}>Swipe!</BackButton>
       <Logo src="public\utils\images\logo.png" alt="Logo" />
     </HeaderContainer>
   );
