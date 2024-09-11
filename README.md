@@ -97,7 +97,7 @@ El proyecto sigue una estructura común para aplicaciones Django y React, con un
 
 ## Tecnologías
 
-**Backend**
+**Backend**  _(https://github.com/Fire-Fairy84/book_swipe_back)_
 
 - [Python 3.12](https://www.python.org/)
 - [Django 5.1.1](https://www.djangoproject.com/)
@@ -106,7 +106,7 @@ El proyecto sigue una estructura común para aplicaciones Django y React, con un
 - [Pillow 10.0.1](https://python-pillow.org/) para manejo de imágenes
 - [Pytest 7.4.2](https://docs.pytest.org/en/stable/)
 
-**Backend** _(https://github.com/Fire-Fairy84/book_swipe_back)_
+**Frontend** 
 
 - [React.js 9.7.4](https://reactjs.org/)
 - [Styled-components 6.1.13](https://styled-components.com/)
