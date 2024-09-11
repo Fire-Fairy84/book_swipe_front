@@ -35,40 +35,26 @@ El frontend está desarrollado en React utilizando styled-components, mientras q
 
 ### Requerimientos
 
-- [Python 3.x](https://www.python.org/downloads/)
-- [PostgreSQL](https://www.postgresql.org/download/)
-- [Virtualenv](https://virtualenv.pypa.io/en/latest/)
-- [Git](https://git-scm.com/)
-
-1. Clona el repositorio del backend:
-
+1. **Clona el repositorio:**
    ```bash
-   git clone https://github.com/tu-usuario/book_swipe-back
+   git clone https://github.com/Fire-Fairy84/book_swipe_front
+   ```
+2. **Instala las dependencias:**
+   ```bash
+   npm install
    ```
 
-2. Crea y activa un entorno virtual:
 
+## 🧪 Testing
+
+
+- **Ejecuta los tests unitarios y de integración:**
    ```bash
-   cd bookswipe-back
-   python -m venv env
-   source env/bin/activate  # En Windows usa: env\Scripts\activate
+   npm test
    ```
 
-3. Instala las dependencias:
 
-   ```bash
-   pip install -r requirements.txt
-   ```
 
-4. Configura tu base de datos PostgreSQL y añade las credenciales en el archivo `settings.py` de Django.
-
-5. Realiza las migraciones y corre el servidor:
-
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   python manage.py runserver
-   ```
 
 ## Estructura del proyecto
 
@@ -122,7 +108,7 @@ El proyecto sigue una estructura común para aplicaciones Django y React, con un
 - [Pillow 10.0.1](https://python-pillow.org/) para manejo de imágenes
 - [Pytest 7.4.2](https://docs.pytest.org/en/stable/)
 
-**Frontend** _(https://github.com/Fire-Fairy84/book_swipe_front)_
+**Backend** _(https://github.com/Fire-Fairy84/book_swipe_back)_
 
 - [React.js 9.7.4](https://reactjs.org/)
 - [Styled-components 6.1.13](https://styled-components.com/)
@@ -167,20 +153,20 @@ A continuación, algunas capturas de la aplicación:
 
 1. Página de inicio.
 
-![Home Page](../book_swipe_front/src/images/home.png)
+![Home Page](./images/home.png)
 
 2. Página de perfil.
 
-![Profile Page](../book_swipe_front/src/images/profile.png)
+![Profile Page](./images/profile.png)
 
 3. Swipe de libros.
 
-![Swipe Page](../book_swipe_front/src/images/swipe_page.png)
+![Swipe Page](./images/swipe_page.png)
 
 4. Estantería de libros.
 
-![Book Shelf Page](../book_swipe_front/src/images/book_shelf.png)
+![Book Shelf Page](./images/book_shelf.png)
 
 5. Añadir nuevo libro.
 
-![Add Book Page](../book_swipe_front/src/images/add_book.png)
+![Add Book Page](./images/add_book.png)
