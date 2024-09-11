@@ -1,33 +1,105 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
-import Swipe from "../pages/Swipe";
-import BookDetail from "../pages/BookDetail";
-import Match from "../pages/Match";
-import UserProfile from "../pages/UserProfile";
-import Account from "../pages/Account";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import Navbar from "../components/Navbar"; // Importar el componente Navbar
+import Layout from "../layout/Layout";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "../pages/home/Home";
+import Swipe from "../pages/swipe/Swipe";
+import Messages from "../pages/messages/Messages";
+import Profile from "../pages/profile/Profile";
+import LoginForm from "../components/login/LoginForm";
+import RegisterForm from "../components/register/RegisterForm";
+import Logout from "../components/logout/Logout";
+import Favorites from "../pages/favorites/Favorites";
+import MySettings from "../pages/mySettings/MySettings";
+import BookShelf from "../pages/bookshelf/BookShelf";
+import AddBook from "../pages/addbook/AddBook";
+import PersonalInfo from "../pages/PersonalInfo";
+import ProtectedRoute from "../router/ProtectedRoute";
 
-function AppRouter() {
-  return (
-    <Router>
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/swipe" element={<Swipe />} />
-          <Route path="/book/:id" element={<BookDetail />} />
-          <Route path="/match/:id" element={<Match />} />
-          <Route path="/user/:id" element={<UserProfile />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-        <Navbar /> {/* Navbar visible en todas las rutas */}
-      </div>
-    </Router>
-  );
-}
-
-export default AppRouter;
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <LoginForm />,
+      },
+      {
+        path: "/register",
+        element: <RegisterForm />,
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
+      },
+      {
+        path: "/swipe",
+        element: (
+          <ProtectedRoute>
+            <Swipe />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/favorites",
+        element: (
+          <ProtectedRoute>
+            <Favorites />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/messages",
+        element: (
+          <ProtectedRoute>
+            <Messages />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/mysettings",
+        element: (
+          <ProtectedRoute>
+            <MySettings />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/bookshelf",
+        element: (
+          <ProtectedRoute>
+            <BookShelf />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/addbook",
+        element: (
+          <ProtectedRoute>
+            <AddBook />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/personalinfo",
+        element: (
+          <ProtectedRoute>
+            <PersonalInfo />
+          </ProtectedRoute>
+        ),
+      },
+    ],
+  },
+]);

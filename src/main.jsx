@@ -1,11 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css"; // Estilos globales
-import Layout from "./layout/Layout"; // Importamos Layout como el principal
+import ReactDOM from "react-dom/client";
+import GlobalStyle from "./globalStyle";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
+import "./index.css";
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Layout />
-  </React.StrictMode>,
-  document.getElementById("root")
+    <GlobalStyle />
+    <RouterProvider router={router} />
+  </React.StrictMode>
 );

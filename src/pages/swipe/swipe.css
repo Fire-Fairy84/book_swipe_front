@@ -1,0 +1,10 @@
+.swipe {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  background-color: #4b4b4b;
+  border-radius: 8px;
+  padding: 1rem;
+  padding-top: 0;
+}
