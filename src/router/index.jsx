@@ -12,9 +12,7 @@ import Favorites from "../pages/favorites/Favorites";
 import MySettings from "../pages/mySettings/MySettings";
 import BookShelf from "../pages/bookshelf/BookShelf";
 import AddBook from "../pages/addbook/AddBook";
-import Match from "../pages/Match";
 import PersonalInfo from "../pages/PersonalInfo";
-import BookDetail from "../pages/BookDetail";
 import ProtectedRoute from "../router/ProtectedRoute";
 
 export const router = createBrowserRouter([
@@ -91,22 +89,6 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <AddBook />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/match",
-        element: (
-          <ProtectedRoute>
-            <Match />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/book/:id",
-        element: (
-          <ProtectedRoute>
-            <BookDetail />
           </ProtectedRoute>
         ),
       },
