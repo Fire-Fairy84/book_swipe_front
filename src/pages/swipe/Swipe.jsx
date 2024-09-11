@@ -102,7 +102,7 @@ const SwipePage = () => {
     );
 
     if (matchFound) {
-      setMatchMessage(`¡Has hecho match con ${bookOwnerName}!`);
+      setMatchMessage(`¡You have a match with ${bookOwnerName}!`);
       setTimeout(() => {
         setMatchMessage("");
       }, 2500);
