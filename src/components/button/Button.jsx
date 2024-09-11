@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-// Estilo para el botón
 const StyledButton = styled.button`
   background-color: #007a8c;
   border: 1px solid #ccc;
@@ -20,7 +19,6 @@ const StyledButton = styled.button`
   }
 `;
 
-// Componente Button que recibe props
 const Button = ({ text, onClick }) => {
   return <StyledButton onClick={onClick}>{text}</StyledButton>;
 };

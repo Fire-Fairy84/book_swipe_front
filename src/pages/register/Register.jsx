@@ -29,12 +29,10 @@ function Register() {
 
       localStorage.setItem("token", response.data.token);
 
-      // Mostrar notificación de éxito
       setIsSuccess(true);
       setNotificationMessage("Register successful!");
       setShowNotification(true);
 
-      // Retrasar la redirección al login hasta que se muestre la notificación
       setTimeout(() => {
         navigate("/login");
       }, 2000);

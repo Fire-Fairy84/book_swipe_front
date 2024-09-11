@@ -6,7 +6,6 @@ import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import styled from "styled-components";
 
-// Estilos para la lista de chats
 const MessagesContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,14 +52,12 @@ const MessagesPage = () => {
           return;
         }
 
-        // Obtener los matches desde la API
         const response = await axios.get(`${API_BASE_URL}matches/`, {
           headers: {
             Authorization: `Token ${token}`,
           },
         });
 
-        // Filtrar matches duplicados basados en el ID de usuario
         const uniqueMatches = response.data.filter(
           (match, index, self) =>
             index ===

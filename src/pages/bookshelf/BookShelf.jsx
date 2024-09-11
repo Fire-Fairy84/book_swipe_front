@@ -69,7 +69,6 @@ const BookShelf = () => {
     fetchBooks();
   }, []);
 
-  // Función para eliminar un libro
   const handleDelete = async (bookId) => {
     try {
       const token = localStorage.getItem("token");
@@ -79,7 +78,6 @@ const BookShelf = () => {
         },
       });
 
-      // Actualizar la lista de libros después de eliminar uno
       setBooks(books.filter((book) => book.id !== bookId));
     } catch (err) {
       console.error("Error deleting book:", err.message);

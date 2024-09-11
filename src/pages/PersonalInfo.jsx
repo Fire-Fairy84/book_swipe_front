@@ -3,8 +3,8 @@ import React from "react";
 function PersonalInfo() {
   return (
     <div>
-      <h1>Información Personal</h1>
-      <p>Esta página está en construcción.</p>
+      <h1>Personal Info</h1>
+      <p>Coming soon.</p>
     </div>
   );
 }

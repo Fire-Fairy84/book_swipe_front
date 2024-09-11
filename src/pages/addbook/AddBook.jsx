@@ -58,7 +58,7 @@ const AddBook = () => {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
-    description: "", // Añadimos el campo description
+    description: "",
     cover_image: null,
   });
 

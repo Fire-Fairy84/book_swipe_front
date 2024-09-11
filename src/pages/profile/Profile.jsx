@@ -5,7 +5,6 @@ import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 
-// Estilos para la página MyProfile
 const MyProfileContainer = styled.div`
   display: flex;
   flex-direction: column;

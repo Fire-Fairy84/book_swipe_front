@@ -5,7 +5,7 @@ function MySettings() {
   return (
     <div>
       <h1>Settings</h1>
-      <p>Esta página está en construcción.</p>
+      <p>Coming soon.</p>
       <Navbar />
     </div>
   );
