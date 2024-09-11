@@ -6,7 +6,6 @@ function BookDetail() {
   return (
     <div>
       <h1>Descripción del Libro {id}</h1>
-      {/* Mostrar información detallada del libro */}
     </div>
   );
 }
