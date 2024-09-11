@@ -24,7 +24,7 @@ const Logout = () => {
       } catch (err) {
         console.error("Logout error:", err);
 
-        navigate("/login");
+        navigate("/");
       }
     };
 

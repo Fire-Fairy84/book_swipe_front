@@ -51,11 +51,12 @@ export const SwipeButtonContainer = styled.div`
 `;
 
 export const SwipeButton = styled.button`
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  font-size: 24px;
+  font-size: 30px; // Tamaño del ícono
   background-color: #4b4b4b;
+  color: white;
   border: none;
   cursor: pointer;
   display: flex;
